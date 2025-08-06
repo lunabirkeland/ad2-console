@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>AD2 console</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="style.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+	</head>
+	<body>
+		<!-- Settings button trigger modal -->
+		<div class="z-1 position-absolute top-0 end-0 m-2">
+			<button type="button" class="btn bi bi-gear" data-bs-toggle="modal" data-bs-target="#settings-modal"></button>
+			<div class="dropdown">
+				<button class="btn" id="bd-theme" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<span class="d-light" data-bs-theme-value="light"` hidden>
+						<i class="bi bi-sun"></i>
+					</span>
+					<span class="d-dark" data-bs-theme-value="dark" hidden>
+						<i class="bi bi-moon"></i>
+					</span>
+					<span class="d-auto" data-bs-theme-value="auto">
+						<i class="bi bi-circle-half"></i>
+					</span>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme">
+					<li><a class="dropdown-item" data-bs-theme-value="light" href="#">
+						<i class="bi bi-sun"></i>
+						<span class="ms-2">Light</span>
+					</a></li>
+					<li><a class="dropdown-item" data-bs-theme-value="dark" href="#">
+						<i class="bi bi-moon"></i>
+						<span class="ms-2">Dark</span>
+
+					</a></li>
+					<li><a class="dropdown-item" data-bs-theme-value="auto" href="#">
+						<i class="bi bi-circle-half"></i>
+						<span class="ms-2">Auto</span>
+
+					</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="grid text-center">
+			<div class="g-col-2 border m-2 p-2">
+				<h1 class="card-title" id="time-title">Time</h1>
+				<h1 class="card-text" id="time">0:00:00</h1>
+			</div>
+			<div class="g-col-2 border m-2 p-2">
+				<h1 class="card-title" id="rpm-title">RPM</h1>
+				<h1 class="card-text" id="rpm">0</h1>
+			</div>
+			<div class="g-col-2 border m-2 p-2">
+				<h1 class="card-title" id="speed-title">Speed (mph)</h1>
+				<h1 class="card-text" id="speed">0</h1>
+			</div>
+			<div class="g-col-2 border m-2 p-2">
+				<h1 class="card-title" id="distance-title">Distance (miles)</h1>
+				<h1 class="card-text" id="distance">0</h1>
+			</div>
+			<div class="g-col-2 border m-2 p-2">
+				<h1 class="card-title" id="energy-title">Energy (calories)</h1>
+				<h1 class="card-text" id="energy">0</h1>
+			</div>
+			<div class="g-col-2 border m-2 p-2">
+				<h1 class="card-title" id="spins-title">Rotations</h1>
+				<h1 class="card-text" id="spins">0</h1>
+			</div>
+		</div>
+
+		<div class="modal fade" id="settings-modal" tabindex="-1" aria-labelledby="settings-modal-label" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5 text-center" id="settings-modal-label">Settings</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="input-group mb-3">
+							<label class="input-group-text" for="speed-select">Speed</label>
+							<select class="form-select" id="speed-select">
+								<option value="mph">mph</option>
+								<option value="km/h">km/h</option>
+								<option value="m/s">m/s</option>
+							</select>
+							<select class="form-select" id="speed-decimal-select">
+								<option value=0>00</option>
+								<option value=1>00.0</option>
+								<option value=2>00.00</option>
+							</select>
+						</div>
+						<div class="input-group mb-3">
+							<label class="input-group-text" for="distance-select">Distance</label>
+							<select class="form-select" id="distance-select">
+								<option value="miles">miles</option>
+								<option value="km">km</option>
+								<option value="m">m</option>
+							</select>
+							<select class="form-select" id="distance-decimal-select">
+								<option value=0>00</option>
+								<option value=1>00.0</option>
+								<option value=2>00.00</option>
+							</select>
+						</div>
+						<div class="input-group mb-3">
+							<label class="input-group-text" for="energy-select">Energy</label>
+							<select class="form-select" id="energy-select">
+								<option value="calories">calories</option>
+								<option value="kJ">kJ</option>
+							</select>
+							<select class="form-select" id="energy-decimal-select">
+								<option value=0>00</option>
+								<option value=1>00.0</option>
+								<option value=2>00.00</option>
+							</select>
+						</div>
+						<div class="input-group mb-3">
+							<label for="sensitivity-range" class="form-label">Sensitivity</label>
+							<input type="range" class="form-range" min="0" max="1" step="0.05" id="sensitivity-range">
+						</div>
+						<div class="progress" role="progressbar" aria-hidden="true" style="height: 5px;transform: rotate(180deg);">
+						<div class="progress-bar bg-success" id="amplitude-bar" style="width: 0%"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="./script.js"></script>
+		<script src="./theme.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+	</body>
+</html>
