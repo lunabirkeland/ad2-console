@@ -195,21 +195,12 @@ const timer = new Timer();
 
 const audioContext = new AudioContext();
 
-if (!navigator.getUserMedia)
-  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-
-if (navigator.getUserMedia){
-
-  navigator.getUserMedia({audio:true}, 
-    function(stream) {
-      start_microphone(stream);
-    },
-    function(e) {
-      alert('Error capturing audio.');
-    }
-  );
-
-} else { alert('getUserMedia not supported in this browser.'); }
+navigator.mediaDevices.getUserMedia({audio:true})
+  .then(start_microphone)
+  .catch((err) => {
+    alert('Error capturing audio.\n' + `${err.name}: ${err.message}`);
+  }
+);
 
 async function start_microphone(stream){
   gain_node = audioContext.createGain();
